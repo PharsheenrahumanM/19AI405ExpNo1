@@ -1,6 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h3>Name: Pharhseen Rahuman M</h3>
+<h3>Register Number/Staff Id: 212224230193</h3>
 
 
 <h3>AIM:</h3>
@@ -40,3 +40,48 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+<H3>Program</H3>
+
+        import random
+        class MedicinePrescribingAgent:
+        def __init__(self):
+        self.performance = 0
+        self.rooms = ["Room1", "Room2"]
+        self.location = random.choice(self.rooms)  # agent starts in a random room
+
+    def sense_patient(self):
+        """Sense patient condition (temperature) in the current room"""
+        temperature = round(random.uniform(97.0, 103.0), 1)  # random temperature
+        return temperature
+
+    def treat_patient(self, temperature):
+        """Treat patient if unhealthy"""
+        if temperature > 98.5:
+            print(f"Patient in {self.location} has fever ({temperature}°F). Prescribing medicine...")
+            self.performance += 1  # reward for treating
+        else:
+            print(f"Patient in {self.location} is healthy ({temperature}°F). No medicine needed.")
+
+    def move_to_other_room(self):
+        """Move agent to the other room"""
+        old_location = self.location
+        self.location = self.rooms[1] if self.location == self.rooms[0] else self.rooms[0]
+        print(f"Moving from {old_location} to {self.location}...")
+        self.performance -= 1  # penalty for moving
+
+    def run(self, steps=5):
+        """Run the agent for given steps"""
+        for step in range(steps):
+            print(f"\nStep {step+1}: Agent in {self.location}")
+            temp = self.sense_patient()
+            self.treat_patient(temp)
+            self.move_to_other_room()
+
+        print("\nFinal Performance:", self.performance)
+        agent = MedicinePrescribingAgent()
+        agent.run(steps=6)
+
+<H3>Output</H3>
+<img width="702" height="576" alt="image" src="https://github.com/user-attachments/assets/512fdbd1-b10b-42cf-b9a1-5714b417c7d3" />
+<H3>Result</H3>
+Developing AI Agent with PEAS Description successfully
